@@ -85,17 +85,19 @@ public class UserRegistration {
 	/**
 	 * UC-5 Password Rule No.1- It should contain at least 8 characters
 	 * UC-6 Password Rule No.2- It should contain at least one Upper case
+	 * UC-7 Password Rule No.3- It should contain at least one number
 	 */
 	public static void getPassword() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Password");
 		String password = sc.next();
-		boolean check = Pattern.matches("(?=.*[A-Z])[A-Za-z]{8,}", password);
+		boolean check = Pattern.matches("(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,}", password);
 		if (check) {
 			user.setMobileNumber(password);
 		} else {
 			System.out.println("Password should contain at least 8 character");
 			System.out.println("Password should contain at least one Upper case");
+			System.out.println("Password should contain at least one number");
 			getPassword();
 		}
 	}
