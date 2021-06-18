@@ -18,8 +18,6 @@ public class UserRegistration {
 	
 	/**
 	 * UC-1 Method to validate first name
-	 * @param Name
-	 * @return
 	 */	
 	public static void getFirstName() {
 		Scanner sc = new Scanner(System.in);
@@ -36,9 +34,7 @@ public class UserRegistration {
 	}
 	
 	/**
-	 * UC-1 Method to validate first name
-	 * @param Name
-	 * @return
+	 * UC-2 Method to validate Last name
 	 */	
 	public static void getLastName() {
 		Scanner sc = new Scanner(System.in);
