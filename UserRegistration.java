@@ -82,12 +82,29 @@ public class UserRegistration {
 		}
 	}
 
+	/**
+	 * UC-5 Password Rule No.1- It should contain at least 8 characters
+	 */
+	public static void getPassword() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Password");
+		String password = sc.next();
+		boolean check = Pattern.matches("[A-Za-z]{8,}", password);
+		if (check) {
+			user.setMobileNumber(password);
+		} else {
+			System.out.println("Password should at 8 characters");
+			getPassword();
+		}
+	}
+	
 	public static void main(String[] args) {
 
 		getFirstName();
 		getLastName();
 		getEmail();
 		getMobileNumber();
+		getPassword();
 	}
 
 }
