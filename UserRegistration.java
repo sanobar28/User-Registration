@@ -67,13 +67,13 @@ public class UserRegistration {
 	}
 
 	/**
-	 * UC-4 Method to validate Mobile number
+	 * UC-4 Method to validate Mobile number with country code
 	 */
 	public static void getMobileNumber() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Mobile Number");
 		String phoneNo = sc.next();
-		boolean check = Pattern.matches("^[7-9][0-9]{9}$", phoneNo);
+		boolean check = Pattern.matches("^(\\+91)[7-9][0-9]{9}$", phoneNo);
 		if (check) {
 			user.setMobileNumber(phoneNo);
 		} else {
