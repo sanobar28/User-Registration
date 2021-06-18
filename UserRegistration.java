@@ -42,11 +42,28 @@ public class UserRegistration {
 		String lastName= sc.next();
 		boolean check = Pattern.matches("^[A-Z]{1}[a-z]{2,}", lastName);
 		if(check) {
-			user.setFirstName(lastName);
+			user.setLastName(lastName);
 		}
 		else {
 			System.out.println("Last name start with capital letter");
-			getFirstName();
+			getLastName();
+		}
+	}
+	
+	/**
+	 * UC-3 Method to validate Email ID
+	 */	
+	public static void getEmail() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Email ID");
+		String emailID= sc.next();
+		boolean check = Pattern.matches("^([a-z]{2,}[0-9a-z]{1,}([_+-.*$#]{0,1}[a-z0-9]{1,}){0,1}[@]{1}[a-z0-1]{1,}[.]{1}[a-z]{2,4}([.]{0,1}[a-z]{2}){0,1})$", emailID);
+		if(check) {
+			user.setEmail(emailID);
+		}
+		else {
+			System.out.println("Invalid email");
+			getEmail();
 		}
 	}
 	
@@ -54,6 +71,7 @@ public class UserRegistration {
 		
 		getFirstName();
 		getLastName();
+		getEmail();
 	}
 
 }
