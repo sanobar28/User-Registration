@@ -15,44 +15,47 @@ import java.util.Scanner;
 public class UserRegistration {
 
 	static User user = new User();
+	static Scanner sc = new Scanner(System.in);
+	String regPattern = "^[A-Z]{1}[a-z]{2,}$";
 
 	/**
 	 * UC-1 Method to validate first name
 	 */
-	public static void getFirstName() {
-		Scanner sc = new Scanner(System.in);
+	public static boolean getFirstName() { 
 		System.out.println("Enter first name");
-		String firstName = sc.next();
-		boolean check = Pattern.matches("^[A-Z]{1}[a-z]{2,}", firstName);
+		String firstNmae = sc.next();
+		boolean check = Pattern.matches("^[A-Z]{1}[a-z]{2,}$", firstNmae);
 		if (check) {
-			user.setFirstName(firstName);
+			user.setFirstName(firstNmae);
 		} else {
-			System.out.println("First name start with capital letter");
+			System.out.println("Invalid first name");
 			getFirstName();
 		}
+		return false;
 	}
 
 	/**
 	 * UC-2 Method to validate Last name
 	 */
-	public static void getLastName() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter last name");
+	public static boolean getLastName() { 
+		
+		System.out.println("Enter Last name");
 		String lastName = sc.next();
-		boolean check = Pattern.matches("^[A-Z]{1}[a-z]{2,}", lastName);
+		boolean check = Pattern.matches("^[A-Z]{1}[a-z]{2,}$", lastName);
 		if (check) {
 			user.setLastName(lastName);
 		} else {
-			System.out.println("Last name start with capital letter");
+			System.out.println("Invalid last name");
 			getLastName();
 		}
+		return false;
 	}
 
 	/**
 	 * UC-3 Method to validate Email ID
 	 */
-	public static void getEmail() {
-		Scanner sc = new Scanner(System.in);
+	public static boolean getEmail() {
+		
 		System.out.println("Enter Email ID");
 		String emailID = sc.next();
 		boolean check = Pattern.matches(
@@ -64,13 +67,14 @@ public class UserRegistration {
 			System.out.println("Invalid email");
 			getEmail();
 		}
+		return false;
 	}
 
 	/**
 	 * UC-4 Method to validate Mobile number with country code
 	 */
-	public static void getMobileNumber() {
-		Scanner sc = new Scanner(System.in);
+	public static boolean getMobileNumber() {
+		
 		System.out.println("Enter Mobile Number");
 		String phoneNo = sc.next();
 		boolean check = Pattern.matches("^(\\+91)[7-9][0-9]{9}$", phoneNo);
@@ -80,19 +84,22 @@ public class UserRegistration {
 			System.out.println("Invalid Mobile No.");
 			getMobileNumber();
 		}
+		return false;
 	}
 
 	/**
-	 * UC-5 Password Rule No.1- It should contain at least 8 characters
-	 * UC-6 Password Rule No.2- It should contain at least one Upper case
-	 * UC-7 Password Rule No.3- It should contain at least one number
+	 * UC-5 Password Rule No.1- It should contain at least 8 characters 
+	 * UC-6 Password Rule No.2- It should contain at least one Upper case 
+	 * UC-7 Password Rule No.3- It should contain at least one number 
 	 * UC-8 Password Rule No.4- It should contain exact one special character
+	 * 
 	 */
-	public static void getPassword() {
-		Scanner sc = new Scanner(System.in);
+	public static boolean getPassword() {
+		
 		System.out.println("Enter Password");
 		String password = sc.next();
-		boolean check = Pattern.matches("^((?=[^@|#|&|%|*]*[@|&|#|%|*][^@|#|&|%|*]*$)(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9@#$%&*]{8,})$", password);
+		boolean check = Pattern.matches(
+				"^((?=[^@|#|&|%|*]*[@|&|#|%|*][^@|#|&|%|*]*$)(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9@#$%&*]{8,})$", password);
 		if (check) {
 			user.setMobileNumber(password);
 		} else {
@@ -102,12 +109,13 @@ public class UserRegistration {
 			System.out.println("Password should contain exact one special character");
 			getPassword();
 		}
+		return false;
 	}
-	
+
 	public static void main(String[] args) {
 
 		getFirstName();
-		getLastName();
+		getLastName();	
 		getEmail();
 		getMobileNumber();
 		getPassword();
