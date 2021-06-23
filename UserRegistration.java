@@ -9,7 +9,6 @@
 
 package regexpattern;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Scanner;
 
@@ -23,22 +22,15 @@ public class UserRegistration {
 	 * 
 	 * Added custom exception handler with try catch to handle invalid inputs.
 	 */
-	public void validateUserName(String name) {
+	public boolean getFirstName(String name) {
 
-		try {
-			Pattern pattern = Pattern.compile(("^[A-Z]{1}[a-z]{2,}"));
-			Matcher matcher = pattern.matcher(name);
-			boolean match = matcher.matches();
+		boolean match;
+		match = Pattern.matches("^[A-Z]{1}[a-z]{2,}$", name);
+		if (!match) {
 
-			if (match) {
-				System.out.println("name is valid");
-			} else {
-				throw new UserRegistrationException("Invalid Input");
-			}
-		} catch (UserRegistrationException | NullPointerException e) {
-			System.out.println(e.getMessage());
+			ErrorMessage("Invalid Name");
 		}
-
+		return match;
 	}
 
 	/**
@@ -46,22 +38,17 @@ public class UserRegistration {
 	 * 
 	 * Added custom exception handler with try catch to handle invalid inputs.
 	 */
-	public void validateUserEmail(String email) {
+	public boolean getEmail(String email) {
 
-		try {
-			Pattern pattern = Pattern.compile(
-					("^([a-z]{2,}[0-9a-z]{1,}([_+-.*$#]{0,1}[a-z0-9]{1,}){0,1}[@]{1}[a-z0-1]{1,}[.]{1}[a-z]{2,4}([.]{0,1}[a-z]{2}){0,1})$"));
-			Matcher matcher = pattern.matcher(email);
-			boolean match = matcher.matches();
+		boolean match;
+		match = Pattern.matches(
+				"^([a-z]{2,}[0-9a-z]{1,}([_+-.*$#]{0,1}[a-z0-9]{1,}){0,1}[@]{1}[a-z0-1]{1,}[.]{1}[a-z]{2,4}([.]{0,1}[a-z]{2}){0,1})$",
+				email);
+		if (!match) {
 
-			if (match) {
-				System.out.println("email is valid");
-			} else {
-				throw new UserRegistrationException("Invalid Input");
-			}
-		} catch (UserRegistrationException | NullPointerException e) {
-			System.out.println(e.getMessage());
+			ErrorMessage("Invalid Email");
 		}
+		return match;
 	}
 
 	/**
@@ -69,20 +56,15 @@ public class UserRegistration {
 	 * 
 	 * Added custom exception handler with try catch to handle invalid inputs.
 	 */
-	public void validateUserPhoneNumber(String phoneNumber) {
+	public boolean getMobileNumber(String phoneNumber) {
 
-		try {
-			Pattern pattern = Pattern.compile(("^[\\+?][9?][1?][\\s\\-?][\\d]{10}"));
-			Matcher matcher = pattern.matcher(phoneNumber);
-			boolean match = matcher.matches();
-			if (match) {
-				System.out.println(" phone number is valid");
-			} else {
-				throw new UserRegistrationException("Invalid Input");
-			}
-		} catch (UserRegistrationException | NullPointerException e) {
-			System.out.println(e.getMessage());
+		boolean match;
+		match = Pattern.matches("^[\\+?][9?][1?][\\s\\-?][\\d]{10}", phoneNumber);
+		if (!match) {
+
+			ErrorMessage("Invalid Mobile No. ");
 		}
+		return match;
 
 	}
 
@@ -95,21 +77,26 @@ public class UserRegistration {
 	 * 
 	 * Added custom exception handler with try catch to handle invalid inputs.
 	 */
-	public void validateUserPassword(String password) {
+	public boolean getPassword(String password) {
 
-		// defining pattern and matcher class for validation
-		try {
-			Pattern pattern = Pattern.compile("^(?=.*[@#$%^&+=])(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$");
-			Matcher matcher = pattern.matcher(password);
-			boolean match = matcher.matches();
-			if (match) {
-				System.out.println("Password is Valid");
-			} else {
-				throw new UserRegistrationException("Invalid Input");
-			}
-		} catch (UserRegistrationException | NullPointerException e) {
-			System.out.println(e.getMessage());
+		boolean match;
+		match = Pattern.matches("^(?=.*[@#$%^&+=])(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$", password);
+		if (!match) {
+
+			ErrorMessage("Invalid Password ");
 		}
+		return match;
 
+	}
+
+	/**
+	 * UC-13 Lambda function to validate user input
+	 * 
+	 * @param message
+	 */
+	public void ErrorMessage(String message) {
+
+		ILambdaValidation i = () -> System.out.println(message);
+		i.ErrorMessage();
 	}
 }
